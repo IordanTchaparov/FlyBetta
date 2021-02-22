@@ -8,26 +8,26 @@ import * as auth from "../_redux/authRedux";
 import { register } from "../_redux/authCrud";
 
 const initialValues = {
-  fullname: "",
+  // fullname: "",
   email: "",
-  username: "",
+  // username: "",
   password: "",
   changepassword: "",
-  acceptTerms: false,
+  // acceptTerms: false,
 };
 
 function Registration(props) {
   const { intl } = props;
   const [loading, setLoading] = useState(false);
   const RegistrationSchema = Yup.object().shape({
-    fullname: Yup.string()
-      .min(3, "Minimum 3 symbols")
-      .max(50, "Maximum 50 symbols")
-      .required(
-        intl.formatMessage({
-          id: "AUTH.VALIDATION.REQUIRED_FIELD",
-        })
-      ),
+    // fullname: Yup.string()
+    //   .min(3, "Minimum 3 symbols")
+    //   .max(50, "Maximum 50 symbols")
+    //   .required(
+    //     intl.formatMessage({
+    //       id: "AUTH.VALIDATION.REQUIRED_FIELD",
+    //     })
+    //   ),
     email: Yup.string()
       .email("Wrong email format")
       .min(3, "Minimum 3 symbols")
@@ -37,14 +37,14 @@ function Registration(props) {
           id: "AUTH.VALIDATION.REQUIRED_FIELD",
         })
       ),
-    username: Yup.string()
-      .min(3, "Minimum 3 symbols")
-      .max(50, "Maximum 50 symbols")
-      .required(
-        intl.formatMessage({
-          id: "AUTH.VALIDATION.REQUIRED_FIELD",
-        })
-      ),
+    // username: Yup.string()
+    //   .min(3, "Minimum 3 symbols")
+    //   .max(50, "Maximum 50 symbols")
+    //   .required(
+    //     intl.formatMessage({
+    //       id: "AUTH.VALIDATION.REQUIRED_FIELD",
+    //     })
+    //   ),
     password: Yup.string()
       .min(3, "Minimum 3 symbols")
       .max(50, "Maximum 50 symbols")
@@ -66,9 +66,9 @@ function Registration(props) {
           "Password and Confirm Password didn't match"
         ),
       }),
-    acceptTerms: Yup.bool().required(
-      "You must accept the terms and conditions"
-    ),
+    // acceptTerms: Yup.bool().required(
+    //   "You must accept the terms and conditions"
+    // ),
   });
 
   const enableLoading = () => {
@@ -140,7 +140,7 @@ function Registration(props) {
         {/* end: Alert */}
 
         {/* begin: Fullname */}
-        <div className="form-group fv-plugins-icon-container">
+        {/* <div className="form-group fv-plugins-icon-container">
           <input
             placeholder="Full name"
             type="text"
@@ -155,7 +155,7 @@ function Registration(props) {
               <div className="fv-help-block">{formik.errors.fullname}</div>
             </div>
           ) : null}
-        </div>
+        </div> */}
         {/* end: Fullname */}
 
         {/* begin: Email */}
@@ -178,7 +178,7 @@ function Registration(props) {
         {/* end: Email */}
 
         {/* begin: Username */}
-        <div className="form-group fv-plugins-icon-container">
+        {/* <div className="form-group fv-plugins-icon-container">
           <input
             placeholder="User name"
             type="text"
@@ -193,7 +193,7 @@ function Registration(props) {
               <div className="fv-help-block">{formik.errors.username}</div>
             </div>
           ) : null}
-        </div>
+        </div> */}
         {/* end: Username */}
 
         {/* begin: Password */}
@@ -237,7 +237,7 @@ function Registration(props) {
         {/* end: Confirm Password */}
 
         {/* begin: Terms and Conditions */}
-        <div className="form-group">
+        {/* <div className="form-group">
           <label className="checkbox">
             <input
               type="checkbox"
@@ -260,15 +260,14 @@ function Registration(props) {
               <div className="fv-help-block">{formik.errors.acceptTerms}</div>
             </div>
           ) : null}
-        </div>
+        </div> */}
         {/* end: Terms and Conditions */}
         <div className="form-group d-flex flex-wrap flex-center">
           <button
             type="submit"
             disabled={
-              formik.isSubmitting ||
-              !formik.isValid ||
-              !formik.values.acceptTerms
+              formik.isSubmitting || !formik.isValid //||
+              // !formik.values.acceptTerms
             }
             className="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-4"
           >
