@@ -7,6 +7,7 @@ import Login from "./Login";
 import Registration from "./Registration";
 import ForgotPassword from "./ForgotPassword";
 import "../../../../_metronic/_assets/sass/pages/login/classic/login-1.scss";
+import Signup from "./Signup";
 
 export function AuthPage() {
   return (
@@ -50,6 +51,7 @@ export function AuthPage() {
                 <ContentRoute
                   path="/auth/registration"
                   component={Registration}
+                  // component={Signup}
                 />
                 <ContentRoute
                   path="/auth/forgot-password"
