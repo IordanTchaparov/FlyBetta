@@ -29,6 +29,8 @@ export function AuthProvider({ children }) {
   }
 
   function resetPassword(email) {
+    console.log("This is what is sent to Firebase authentication");
+    console.log(email);
     return auth.sendPasswordResetEmail(email);
   }
 

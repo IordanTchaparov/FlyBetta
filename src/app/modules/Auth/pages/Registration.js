@@ -6,9 +6,8 @@ import { Link } from "react-router-dom";
 import { FormattedMessage, injectIntl } from "react-intl";
 import * as auth from "../_redux/authRedux";
 import { register } from "../_redux/authCrud";
-import { signup, userChanged } from "../_redux/customAuth";
-// import { auth } from "/Users/iordantchaparov/Documents/Flybetta/Git/FlyBetta/src/firebase"; //this is not good importing
-import firebase from "firebase";
+// import { signup, userChanged } from "../_redux/customAuth";
+import { useAuth } from "./AuthContext";
 
 const initialValues = {
   email: "",
@@ -19,6 +18,8 @@ const initialValues = {
 function Registration(props) {
   const { intl } = props;
   const [loading, setLoading] = useState(false);
+  const { currentUser, signup } = useAuth();
+
   const RegistrationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Wrong email format")
@@ -106,6 +107,8 @@ function Registration(props) {
         .then((userCredential) => {
           var user = userCredential.user;
           console.log(user);
+          console.log("Registration");
+          console.log(currentUser);
           disableLoading();
           setSubmitting(false);
         })

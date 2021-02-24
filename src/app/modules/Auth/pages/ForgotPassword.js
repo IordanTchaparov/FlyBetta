@@ -5,7 +5,8 @@ import { Link, Redirect } from "react-router-dom";
 import * as Yup from "yup";
 import { injectIntl } from "react-intl";
 import * as auth from "../_redux/authRedux";
-import { requestPassword } from "../_redux/authCrud";
+// import { requestPassword } from "../_redux/authCrud";
+import { useAuth } from "./AuthContext";
 
 const initialValues = {
   email: "",
@@ -13,6 +14,7 @@ const initialValues = {
 
 function ForgotPassword(props) {
   const { intl } = props;
+  const { currentUser, resetPassword } = useAuth();
   const [isRequested, setIsRequested] = useState(false);
   const ForgotPasswordSchema = Yup.object().shape({
     email: Yup.string()
@@ -38,11 +40,32 @@ function ForgotPassword(props) {
     return "";
   };
 
+  // const formik = useFormik({
+  //   initialValues,
+  //   validationSchema: ForgotPasswordSchema,
+  //   onSubmit: (values, { setStatus, setSubmitting }) => {
+  //     requestPassword(values.email)
+  //       .then(() => setIsRequested(true))
+  //       .catch(() => {
+  //         setIsRequested(false);
+  //         setSubmitting(false);
+  //         setStatus(
+  //           intl.formatMessage(
+  //             { id: "AUTH.VALIDATION.NOT_FOUND" },
+  //             { name: values.email }
+  //           )
+  //         );
+  //       });
+  //   },
+  // });
+
   const formik = useFormik({
     initialValues,
     validationSchema: ForgotPasswordSchema,
     onSubmit: (values, { setStatus, setSubmitting }) => {
-      requestPassword(values.email)
+      console.log("FORGOT PASSWORD");
+      console.log(values.email);
+      resetPassword(values.email)
         .then(() => setIsRequested(true))
         .catch(() => {
           setIsRequested(false);

@@ -35,7 +35,7 @@ export function UserProfileDropdown() {
             Hi,
           </span>{" "}
           <span className="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
-            {user.firstname} {user.lastname}
+            {/* {user.firstname} {user.lastname} */}
           </span>
           <span className="symbol symbol-35 symbol-light-success">
             <span className="symbol-label font-size-h5 font-weight-bold">
@@ -54,7 +54,7 @@ export function UserProfileDropdown() {
                   <img src={toAbsoluteUrl("/media/users/300_21.jpg")} alt="" />
                 </div>
                 <div className="text-dark m-0 flex-grow-1 mr-3 font-size-h5">
-                  {user.firstname} {user.lastname}
+                  {/* {user.firstname} {user.lastname} */}
                 </div>
                 <span className="label label-light-success label-lg font-weight-bold label-inline">
                   3 messages
@@ -80,7 +80,7 @@ export function UserProfileDropdown() {
                 {/*<img alt="Pic" className="hidden" src={user.pic} />*/}
               </div>
               <div className="text-white m-0 flex-grow-1 mr-3 font-size-h5">
-                {user.firstname} {user.lastname}
+                {/* {user.firstname} {user.lastname} */}
               </div>
               <span className="label label-success label-lg font-weight-bold label-inline">
                 3 messages
