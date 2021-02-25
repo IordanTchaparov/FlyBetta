@@ -1,8 +1,6 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React from "react";
 import { Redirect } from "react-router-dom";
 import { LayoutSplashScreen } from "../../../../_metronic/layout";
-import * as auth from "../_redux/authRedux";
 import { useAuth } from "./AuthContext";
 
 // class Logout extends Component {
@@ -26,6 +24,7 @@ import { useAuth } from "./AuthContext";
 //   auth.actions
 // )(Logout);
 
+// Cant use hooks in classes so had to make a function instead - surprised this even works lol
 function Logout() {
   const { currentUser, logout } = useAuth();
 

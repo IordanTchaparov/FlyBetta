@@ -5,8 +5,6 @@ import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import { FormattedMessage, injectIntl } from "react-intl";
 import * as auth from "../_redux/authRedux";
-import { register } from "../_redux/authCrud";
-// import { signup, userChanged } from "../_redux/customAuth";
 import { useAuth } from "./AuthContext";
 
 const initialValues = {
@@ -74,30 +72,6 @@ function Registration(props) {
   };
 
   const formik = useFormik({
-    //   initialValues,
-    //   validationSchema: RegistrationSchema,
-    //   onSubmit: (values, { setStatus, setSubmitting }) => {
-    //     setSubmitting(true);
-    //     enableLoading();
-    //     // register(values.email, values.fullname, values.username, values.password)
-    //     signup(values.email, values.password)
-    //       .then(({ data: { accessToken } }) => {
-    //         props.register(accessToken);
-    //         disableLoading();
-    //         setSubmitting(false);
-    //       })
-    //       .catch(() => {
-    //         setSubmitting(false);
-    //         setStatus(
-    //           intl.formatMessage({
-    //             id: "AUTH.VALIDATION.INVALID_LOGIN",
-    //           })
-    //         );
-    //         disableLoading();
-    //       });
-    //   },
-    // });
-
     initialValues,
     validationSchema: RegistrationSchema,
     onSubmit: (values, { setStatus, setSubmitting }) => {

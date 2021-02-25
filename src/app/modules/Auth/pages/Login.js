@@ -5,8 +5,6 @@ import * as Yup from "yup";
 import { connect } from "react-redux";
 import { FormattedMessage, injectIntl } from "react-intl";
 import * as auth from "../_redux/authRedux";
-// import { login } from "../_redux/authCrud";
-// import { login } from "../_redux/customAuth";
 import { useAuth } from "./AuthContext";
 import { toAbsoluteUrl } from "../../../../_metronic/_helpers";
 /*
@@ -69,29 +67,6 @@ function Login(props) {
   };
 
   const formik = useFormik({
-    //   initialValues,
-    //   validationSchema: LoginSchema,
-    //   onSubmit: (values, { setStatus, setSubmitting }) => {
-    //     enableLoading();
-    //     setTimeout(() => {
-    //       login(values.email, values.password)
-    //         .then(({ data: { accessToken } }) => {
-    //           disableLoading();
-    //           props.login(accessToken);
-    //         })
-    //         .catch(() => {
-    //           disableLoading();
-    //           setSubmitting(false);
-    //           setStatus(
-    //             intl.formatMessage({
-    //               id: "AUTH.VALIDATION.INVALID_LOGIN",
-    //             })
-    //           );
-    //         });
-    //     }, 1000);
-    //   },
-    // });
-
     initialValues,
     validationSchema: LoginSchema,
     onSubmit: (values, { setStatus, setSubmitting }) => {
@@ -101,6 +76,8 @@ function Login(props) {
           .then((userCredential) => {
             console.log("Login");
             console.log(currentUser);
+            console.log("USER CREDENTIALS");
+            console.log(userCredential);
             disableLoading();
           })
           .catch(() => {

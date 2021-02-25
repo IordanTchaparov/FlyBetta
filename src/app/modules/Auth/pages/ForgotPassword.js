@@ -5,7 +5,6 @@ import { Link, Redirect } from "react-router-dom";
 import * as Yup from "yup";
 import { injectIntl } from "react-intl";
 import * as auth from "../_redux/authRedux";
-// import { requestPassword } from "../_redux/authCrud";
 import { useAuth } from "./AuthContext";
 
 const initialValues = {
@@ -39,25 +38,6 @@ function ForgotPassword(props) {
 
     return "";
   };
-
-  // const formik = useFormik({
-  //   initialValues,
-  //   validationSchema: ForgotPasswordSchema,
-  //   onSubmit: (values, { setStatus, setSubmitting }) => {
-  //     requestPassword(values.email)
-  //       .then(() => setIsRequested(true))
-  //       .catch(() => {
-  //         setIsRequested(false);
-  //         setSubmitting(false);
-  //         setStatus(
-  //           intl.formatMessage(
-  //             { id: "AUTH.VALIDATION.NOT_FOUND" },
-  //             { name: values.email }
-  //           )
-  //         );
-  //       });
-  //   },
-  // });
 
   const formik = useFormik({
     initialValues,
@@ -143,4 +123,6 @@ function ForgotPassword(props) {
   );
 }
 
-export default injectIntl(connect(null, auth.actions)(ForgotPassword));
+// export default injectIntl(connect(null, auth.actions)(ForgotPassword));
+//not sure what this is for - seems connected to the old "fake" auth. Leaving for now.
+export default injectIntl(connect(null, null)(ForgotPassword));

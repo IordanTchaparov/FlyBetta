@@ -1,12 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
-// import { auth } from "firebase";
-import { auth } from "/Users/iordantchaparov/Documents/Flybetta/Git/FlyBetta/src/firebase"; //this is not good importing
-import firebase from "firebase";
+import { auth } from "../../../../firebase"; //Needs to import the specifically exported auth in firebase.js as it has the API keys
 
 const AuthContext = React.createContext();
 
-//Checking if the emulator can be used
-firebase.auth().useEmulator("http://localhost:9099/");
+//Comment out below to use actual firebase instead of the emulator
+auth.useEmulator("http://localhost:9099/");
 
 export function useAuth() {
   return useContext(AuthContext);
@@ -29,8 +27,6 @@ export function AuthProvider({ children }) {
   }
 
   function resetPassword(email) {
-    console.log("This is what is sent to Firebase authentication");
-    console.log(email);
     return auth.sendPasswordResetEmail(email);
   }
 
