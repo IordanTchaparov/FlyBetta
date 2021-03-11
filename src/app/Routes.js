@@ -12,18 +12,25 @@ import { Layout } from "../_metronic/layout";
 import BasePage from "./BasePage";
 import { Logout, AuthPage } from "./modules/Auth";
 import ErrorsPage from "./modules/ErrorsExamples/ErrorsPage";
+import { useAuth } from "./modules/Auth/pages/AuthContext";
 
 export function Routes() {
-  const { isAuthorized } = useSelector(
-    ({ auth }) => ({
-      isAuthorized: auth.user != null,
-    }),
-    shallowEqual
-  );
+  const { currentUser } = useAuth();
+  console.log("Routes");
+  console.log(currentUser);
+  // console.log(currentUser.email);
+
+  // const { isAuthorized } = useSelector(
+  //   ({ auth }) => ({
+  //     isAuthorized: auth.user != null,
+  //   }),
+  //   shallowEqual
+  // );
 
   return (
     <Switch>
-      {!isAuthorized ? (
+      {/* {!isAuthorized ? ( */}
+      {!currentUser ? (
         /*Render auth page when user at `/auth` and not authorized.*/
         <Route>
           <AuthPage />
@@ -36,7 +43,9 @@ export function Routes() {
       <Route path="/error" component={ErrorsPage} />
       <Route path="/logout" component={Logout} />
 
-      {!isAuthorized ? (
+      {/* {!isAuthorized ? ( */}
+      {/* {console.log(currentUser.email)} */}
+      {!currentUser ? (
         /*Redirect to `/auth` when user is not authorized*/
         <Redirect to="/auth/login" />
       ) : (

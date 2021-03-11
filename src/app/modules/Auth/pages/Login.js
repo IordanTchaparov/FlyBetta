@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { connect } from "react-redux";
 import { FormattedMessage, injectIntl } from "react-intl";
 import * as auth from "../_redux/authRedux";
-import { login } from "../_redux/authCrud";
+import { useAuth } from "./AuthContext";
 import { toAbsoluteUrl } from "../../../../_metronic/_helpers";
 /*
   INTL (i18n) docs:
@@ -18,12 +18,13 @@ import { toAbsoluteUrl } from "../../../../_metronic/_helpers";
 */
 
 const initialValues = {
-  email: "admin@demo.com",
-  password: "demo",
+  email: "johnny@twosteps.com",
+  password: "password",
 };
 
 function Login(props) {
   const { intl } = props;
+  const { currentUser, login } = useAuth();
   const [loading, setLoading] = useState(false);
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
@@ -72,9 +73,12 @@ function Login(props) {
       enableLoading();
       setTimeout(() => {
         login(values.email, values.password)
-          .then(({ data: { accessToken } }) => {
+          .then((userCredential) => {
+            console.log("Login");
+            console.log(currentUser);
+            console.log("USER CREDENTIALS");
+            console.log(userCredential);
             disableLoading();
-            props.login(accessToken);
           })
           .catch(() => {
             disableLoading();
@@ -114,12 +118,13 @@ function Login(props) {
             <div className="alert-text font-weight-bold">{formik.status}</div>
           </div>
         ) : (
-          <div className="mb-10 alert alert-custom alert-light-info alert-dismissible">
-            <div className="alert-text ">
-              Use account <strong>admin@demo.com</strong> and password{" "}
-              <strong>demo</strong> to continue.
-            </div>
-          </div>
+          <div></div>
+          // <div className="mb-10 alert alert-custom alert-light-info alert-dismissible">
+          //   <div className="alert-text ">
+          //     Use account <strong>admin@demo.com</strong> and password{" "}
+          //     <strong>demo</strong> to continue.
+          //   </div>
+          // </div>
         )}
 
         <div className="form-group fv-plugins-icon-container">

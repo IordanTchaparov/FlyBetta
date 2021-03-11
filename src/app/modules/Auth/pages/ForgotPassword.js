@@ -5,7 +5,7 @@ import { Link, Redirect } from "react-router-dom";
 import * as Yup from "yup";
 import { injectIntl } from "react-intl";
 import * as auth from "../_redux/authRedux";
-import { requestPassword } from "../_redux/authCrud";
+import { useAuth } from "./AuthContext";
 
 const initialValues = {
   email: "",
@@ -13,6 +13,7 @@ const initialValues = {
 
 function ForgotPassword(props) {
   const { intl } = props;
+  const { currentUser, resetPassword } = useAuth();
   const [isRequested, setIsRequested] = useState(false);
   const ForgotPasswordSchema = Yup.object().shape({
     email: Yup.string()
@@ -42,7 +43,9 @@ function ForgotPassword(props) {
     initialValues,
     validationSchema: ForgotPasswordSchema,
     onSubmit: (values, { setStatus, setSubmitting }) => {
-      requestPassword(values.email)
+      console.log("FORGOT PASSWORD");
+      console.log(values.email);
+      resetPassword(values.email)
         .then(() => setIsRequested(true))
         .catch(() => {
           setIsRequested(false);
@@ -120,4 +123,6 @@ function ForgotPassword(props) {
   );
 }
 
-export default injectIntl(connect(null, auth.actions)(ForgotPassword));
+// export default injectIntl(connect(null, auth.actions)(ForgotPassword));
+//not sure what this is for - seems connected to the old "fake" auth. Leaving for now.
+export default injectIntl(connect(null, null)(ForgotPassword));
