@@ -4,7 +4,7 @@ import { auth } from "../../../../firebase"; //Needs to import the specifically 
 const AuthContext = React.createContext();
 
 //Comment out below to use actual firebase instead of the emulator
-auth.useEmulator("http://localhost:9099/");
+// auth.useEmulator("http://localhost:9099/"); //this is the correct one
 
 export function useAuth() {
   return useContext(AuthContext);

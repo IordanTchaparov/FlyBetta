@@ -6,11 +6,13 @@ import { Link } from "react-router-dom";
 import { FormattedMessage, injectIntl } from "react-intl";
 import * as auth from "../_redux/authRedux";
 import { useAuth } from "./AuthContext";
+import DatabaseContext from "../../Database/DBContext";
 
 const initialValues = {
   email: "",
   password: "",
   changepassword: "",
+  name: "",
 };
 
 function Registration(props) {
@@ -80,9 +82,23 @@ function Registration(props) {
       signup(values.email, values.password)
         .then((userCredential) => {
           var user = userCredential.user;
+          console.log("Current User")
           console.log(user);
-          console.log("Registration");
-          console.log(currentUser);
+          //console.log("Registration");
+          //console.log(currentUser);
+          //console.log("LOOK ITS THE NAME");
+          //console.log(values.name);
+          //console.log(values);
+
+          DatabaseContext.create(values)
+            .then(() => {
+              console.log("Created new item successfully!");
+            })
+            .catch((e) => {
+              console.log("NOPE")
+              console.log(e);
+            });
+
           disableLoading();
           setSubmitting(false);
         })
@@ -121,6 +137,23 @@ function Registration(props) {
           </div>
         )}
         {/* end: Alert */}
+
+        <div className="form-group fv-plugins-icon-container">
+          <input
+            placeholder="Name"
+            type="name"
+            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
+              "name"
+            )}`}
+            name="name"
+            {...formik.getFieldProps("name")}
+          />
+          {formik.touched.name && formik.errors.name ? (
+            <div className="fv-plugins-message-container">
+              <div className="fv-help-block">{formik.errors.name}</div>
+            </div>
+          ) : null}
+        </div>
 
         {/* begin: Email */}
         <div className="form-group fv-plugins-icon-container">
@@ -206,3 +239,24 @@ function Registration(props) {
 }
 
 export default injectIntl(connect(null, auth.actions)(Registration));
+
+
+// service cloud.firestore {
+//   match /databases/{database}/documents {
+//     match /{document=**} {
+//       allow read : if request.auth != null;
+//       allow write : if request.auth != null;
+//     }
+//   }
+// }
+
+
+// rules_version = '2';
+// service cloud.firestore {
+//   match /databases/{database}/documents {
+//     match /{document=**} {
+//       allow read, write: if
+//           request.time < timestamp.date(2021, 4, 8);
+//     }
+//   }
+// }
