@@ -13,6 +13,8 @@ const initialValues = {
   password: "",
   changepassword: "",
   name: "",
+  surname: "",
+  phone: "",
 };
 
 function Registration(props) {
@@ -81,9 +83,16 @@ function Registration(props) {
       enableLoading();
       signup(values.email, values.password)
         .then((userCredential) => {
+          // currentUser = userCredential.user;
+          // console.log("Current User");
+          // console.log(currentUser);
+
+          // setCurrentUser()
+
           var user = userCredential.user;
-          console.log("Current User")
+          console.log("Current User");
           console.log(user);
+
           //console.log("Registration");
           //console.log(currentUser);
           //console.log("LOOK ITS THE NAME");
@@ -95,7 +104,7 @@ function Registration(props) {
               console.log("Created new item successfully!");
             })
             .catch((e) => {
-              console.log("NOPE")
+              console.log("NOPE");
               console.log(e);
             });
 
@@ -151,6 +160,40 @@ function Registration(props) {
           {formik.touched.name && formik.errors.name ? (
             <div className="fv-plugins-message-container">
               <div className="fv-help-block">{formik.errors.name}</div>
+            </div>
+          ) : null}
+        </div>
+
+        <div className="form-group fv-plugins-icon-container">
+          <input
+            placeholder="Surname"
+            type="surname"
+            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
+              "surname"
+            )}`}
+            name="surname"
+            {...formik.getFieldProps("surname")}
+          />
+          {formik.touched.name && formik.errors.surname ? (
+            <div className="fv-plugins-message-container">
+              <div className="fv-help-block">{formik.errors.surname}</div>
+            </div>
+          ) : null}
+        </div>
+
+        <div className="form-group fv-plugins-icon-container">
+          <input
+            placeholder="Phone"
+            type="phone"
+            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
+              "phone"
+            )}`}
+            name="phone"
+            {...formik.getFieldProps("phone")}
+          />
+          {formik.touched.name && formik.errors.phone ? (
+            <div className="fv-plugins-message-container">
+              <div className="fv-help-block">{formik.errors.phone}</div>
             </div>
           ) : null}
         </div>
@@ -240,7 +283,6 @@ function Registration(props) {
 
 export default injectIntl(connect(null, auth.actions)(Registration));
 
-
 // service cloud.firestore {
 //   match /databases/{database}/documents {
 //     match /{document=**} {
@@ -249,7 +291,6 @@ export default injectIntl(connect(null, auth.actions)(Registration));
 //     }
 //   }
 // }
-
 
 // rules_version = '2';
 // service cloud.firestore {
